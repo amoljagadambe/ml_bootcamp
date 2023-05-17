@@ -14,8 +14,7 @@ y = dataset.iloc[:, 3].values
 from sklearn.impute import SimpleImputer
 
 si_object = SimpleImputer(missing_values=np.nan, strategy='mean')
-si_object = si_object.fit(X[:, 1:3])
-X[:, 1:3] = si_object.transform(X[:, 1:3])
+X[:, 1:3] = si_object.fit_transform(X[:, 1:3])
 
 # Encoding categorical data
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
