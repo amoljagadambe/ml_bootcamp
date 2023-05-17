@@ -38,4 +38,10 @@ dependant variable will have no correlation
 '''
 label_encoder_y = LabelEncoder()
 y = label_encoder_y.fit_transform(y)
-print(y)
+
+# train & test split
+from sklearn.model_selection import train_test_split
+
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+# feature scaling
