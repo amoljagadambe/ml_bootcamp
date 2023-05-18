@@ -42,5 +42,21 @@ y = label_encoder_y.fit_transform(y)
 from sklearn.model_selection import train_test_split
 
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
-
+print(x_train)
 # feature scaling
+'''
+here we are scaling the dummy encoded variable also
+this will help model to converge faster and we only need to fit
+one time like x_train
+In classification we don't need to scale y variable
+
+here we have two type 1) standardization 2) normalization
+we are using standardization
+'''
+from sklearn.preprocessing import StandardScaler
+
+standard_scale_x = StandardScaler()
+x_train = standard_scale_x.fit_transform(x_train)
+x_test = standard_scale_x.transform(x_test)
+
+print(x_train)
