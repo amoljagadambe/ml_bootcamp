@@ -1,0 +1,40 @@
+In order to build the linear model we have to check if the data follows below Assumption
+
+    1) Linearity
+    2) Homoscedasticity
+    3) Multivariate normality
+    4) Independence of errors (No auto-correlation)
+    5) Lack of multi-collinearity
+
+
+building the regression model
+
+1) backward elimination
+
+    1) select the significance level (default Sl = 0.05)
+    2) fit the model with all independent variable
+    3) consider the variable with highest P-values if P > SL got to 4 else your model is ready.
+    4) remove the variable
+    5) fit the model again with this variable and go to step 4
+
+2) forward selection
+
+    1) select the significance level (default Sl = 0.05)
+    2) fit all simple regression (i.e. one independent variable) models y ~ x^n select the one with lowest P-values
+    3) keep this variable and add one variable and fit all the possible models
+    4) consider the model with lowest P-values if P < SL repeat the step 3 otherwise
+       your model is ready (use previous model).
+
+3) Bi directional elimination (step wise regression)
+
+    1) select the significance level to enter and to stay in the model (default SLENTER = 0.05. SLSTAY = 0.05)
+    2) perform the next step of forward selection (new variable must have P < SLENTER to enter)
+    3) perform the next step of forward elimination (new variable must have P < SLSTAY to stay)
+    4) perform above two-step until a no new variable can enter or no old variable can exit
+    5) model is ready
+
+4) All Possible models
+
+    1) select the criteria of goodness of fit (e.g. Akaike criterion)
+    2) construct all possible regression model: 2^N-1 total combination (n is independent variable)
+    3) select the one with best criterion
