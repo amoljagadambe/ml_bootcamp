@@ -29,21 +29,21 @@ X_ploy = poly_regressor.fit_transform(X)  # converted the X to polynomial variab
 linear_poly_regression = LinearRegression()
 linear_poly_regression.fit(X_ploy, y)
 
-# # Visualizing the linear regression result
-# plt.scatter(X, y, color='red')
-# plt.plot(X, linear_regressor.predict(X), color='blue')
-# plt.xlabel('Position Level')
-# plt.ylabel('Salaries')
-# plt.title('Truth vs Bluff (linear regression)')
-# plt.show()  # check the graph folder named 50_position_linear_regression
-#
-# # Visualizing the polynomial regression result
-# plt.scatter(X, y, color='red')
-# plt.plot(X, linear_poly_regression.predict(X_ploy), color='blue')
-# plt.xlabel('Position Level')
-# plt.ylabel('Salaries')
-# plt.title('Truth vs Bluff (Polynomial regression)')
-# plt.show()  # check the graph folder named 50_position_polynomial_regression
+# Visualizing the linear regression result
+plt.scatter(X, y, color='red')
+plt.plot(X, linear_regressor.predict(X), color='blue')
+plt.xlabel('Position Level')
+plt.ylabel('Salaries')
+plt.title('Truth vs Bluff (linear regression)')
+plt.show()  # check the graph folder named 50_position_linear_regression
+
+# Visualizing the polynomial regression result
+plt.scatter(X, y, color='red')
+plt.plot(X, linear_poly_regression.predict(X_ploy), color='blue')
+plt.xlabel('Position Level')
+plt.ylabel('Salaries')
+plt.title('Truth vs Bluff (Polynomial regression)')
+plt.show()  # check the graph folder named 50_position_polynomial_regression
 
 # predicting a new result with linear regression
 linear_prediction = linear_regressor.predict([[6.5]])  # use array not vector
