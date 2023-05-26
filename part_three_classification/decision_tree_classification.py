@@ -54,3 +54,20 @@ plt.xlabel('Age')
 plt.ylabel('Estimated Salary')
 plt.legend()
 plt.show()  # check the graphs folder with name decision_tree_training_set.png
+
+# Visualize the Decision tree
+'''
+below code will require Graphviz executable installed
+'''
+from io import StringIO
+from IPython.display import Image
+from sklearn.tree import export_graphviz
+import pydotplus
+
+dot_data = StringIO()
+export_graphviz(classifier, out_file=dot_data,
+                filled=True, rounded=True,
+                special_characters=True)
+
+graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
+Image(graph.create_png())
