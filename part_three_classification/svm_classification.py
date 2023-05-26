@@ -40,8 +40,8 @@ print(con_matrix)
 Output: [[66  2] 
         [ 8 24]]
 
-Output (with rbf kernel): [[66  2] 
-                          [ 8 24]]
+Output (with rbf kernel): [[64  4] 
+                          [ 3 29]]
                           
                           
 Output (with Polynomial kernel degree 5): [[67  1] 
