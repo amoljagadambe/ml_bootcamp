@@ -37,21 +37,35 @@ We have to set min length to 2 as it should not associated only single element f
 rules = apriori(list_of_transactions, min_support=0.003, min_confidence=0.2, min_lift=3, min_length=2)
 
 # Visualizing the results
-results = list(rules)  # rules are already sorted by best relevance
+list_of_results = list(rules)  # rules are already sorted by best relevance
 
-"""
-Top 5 association rule
 
-[RelationRecord(items=frozenset({'chicken', 'light cream'}), support=0.004532728969470737, ordered_statistics=[
-OrderedStatistic(items_base=frozenset({'light cream'}), items_add=frozenset({'chicken'}), 
-confidence=0.29059829059829057, lift=4.84395061728395)]), RelationRecord(items=frozenset({'mushroom cream sauce', 
-'escalope'}), support=0.005732568990801226, ordered_statistics=[OrderedStatistic(items_base=frozenset({'mushroom 
-cream sauce'}), items_add=frozenset({'escalope'}), confidence=0.3006993006993007, lift=3.790832696715049)]), 
-RelationRecord( items=frozenset({'pasta', 'escalope'}), support=0.005865884548726837, ordered_statistics=[
-OrderedStatistic(items_base=frozenset({'pasta'}), items_add=frozenset({'escalope'}), confidence=0.3728813559322034, 
-lift=4.700811850163794)]), RelationRecord(items=frozenset({'honey', 'fromage blanc'}), support=0.003332888948140248, 
-ordered_statistics=[OrderedStatistic(items_ba se=frozenset({'fromage blanc'}), items_add=frozenset({'honey'}), 
-confidence=0.2450980392156863, lift=5.164270764485569)]), RelationRecord(items=frozenset({'herb & pepper', 
-'ground beef '}), support=0.015997866951073192, ordered_statistics=[OrderedStatistic(items_base=frozenset({'herb & 
-pepper'}), items_add=frozenset({'ground beef'})] 
-"""
+# Putting the results well organised into a Pandas DataFrame
+def inspect(results):
+    lhs = [tuple(result[2][0][0])[0] for result in results]
+    rhs = [tuple(result[2][0][1])[0] for result in results]
+    supports = [result[1] for result in results]
+    confidences = [result[2][0][2] for result in results]
+    lifts = [result[2][0][3] for result in results]
+    return list(zip(lhs, rhs, supports, confidences, lifts))
+
+
+result_in_dataframe = pd.DataFrame(inspect(list_of_results),
+                                   columns=['Left Hand Side', 'Right Hand Side', 'Support', 'Confidence', 'Lift'])
+
+# Displaying the results sorted by descending lifts
+print(result_in_dataframe.nlargest(n=10, columns='Lift'))
+'''
+        Left Hand Side Right Hand Side   Support  Confidence      Lift
+97                soup            milk  0.003066    0.383333  7.987176
+150               soup            milk  0.003066    0.383333  7.987176
+96   frozen vegetables            milk  0.003333    0.294118  6.128268
+149  frozen vegetables            milk  0.003333    0.294118  6.128268
+132  whole wheat pasta       olive oil  0.003866    0.402778  6.128268
+59   whole wheat pasta       olive oil  0.003866    0.402778  6.115863
+50        tomato sauce       spaghetti  0.003066    0.216981  5.535971
+122       tomato sauce       spaghetti  0.003066    0.216981  5.535971
+28       fromage blanc           honey  0.003333    0.245098  5.178818
+3        fromage blanc           honey  0.003333    0.245098  5.164271
+
+'''
