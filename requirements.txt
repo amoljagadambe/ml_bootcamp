@@ -6,3 +6,4 @@ statsmodels
 pydotplus
 ipython
 scipy
+apyori
