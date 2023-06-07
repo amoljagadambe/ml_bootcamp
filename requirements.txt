@@ -7,3 +7,4 @@ pydotplus
 ipython
 scipy
 apyori
+nltk
