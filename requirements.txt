@@ -8,3 +8,5 @@ ipython
 scipy
 apyori
 nltk
+keras
+tensorflow
