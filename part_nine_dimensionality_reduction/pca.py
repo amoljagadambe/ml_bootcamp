@@ -9,7 +9,7 @@ import pandas as pd
 dataset = pd.read_csv('data_files/Wine.csv')
 X = dataset.iloc[:, 0:13].values
 y = dataset.iloc[:, 13].values
-print(y)
+
 # train & test split
 from sklearn.model_selection import train_test_split
 
@@ -80,4 +80,4 @@ plt.title('Logistic Regression (Training set)')
 plt.xlabel('PC1')
 plt.ylabel('PC2')
 plt.legend()
-plt.show()  # check the graphs folder with name logistic_regression_social_network_ads.png
+plt.show()  # check the graphs folder with name Logistic_regression_using_pca.png
