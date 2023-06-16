@@ -10,3 +10,4 @@ apyori
 nltk
 keras
 tensorflow
+xgboost
