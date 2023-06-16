@@ -1,4 +1,4 @@
-# PCA (Principal component analysis)
+# PCA (Principal component analysis) This is unsupervised algorithm and dataset is linear
 
 # Importing Libraries
 import numpy as np
@@ -27,7 +27,7 @@ from sklearn.decomposition import PCA
 
 pca = PCA(n_components=2)  # we replaced the value 2 after getting below ratio
 x_train = pca.fit_transform(x_train)
-x_test = pca.fit_transform(x_test)
+x_test = pca.transform(x_test)   # do not fit again
 
 explained_variance = pca.explained_variance_ratio_
 print(explained_variance)
@@ -58,24 +58,27 @@ con_matrix = confusion_matrix(y_true=y_test, y_pred=y_prediction)
 print(con_matrix, accuracy_score(y_test, y_prediction))
 '''
 Output: 
- [[ 0  1 13]                    
-  [ 4 11  1]                    
-  [ 6  0  0]]
+[[14  0  0]                    
+ [ 1 15  0]                    
+ [ 0  0  6]] 
+ 
+Accuracy: 0.9722222222222222
+
 '''
 
-# Visualising the training set results
+# Visualising the Training set results
 from matplotlib.colors import ListedColormap
 
 X_set, y_set = x_train, y_train
-X1, X2 = np.meshgrid(np.arange(start=X_set[:, 0].min() - 10, stop=X_set[:, 0].max() + 10, step=0.25),
-                     np.arange(start=X_set[:, 1].min() - 1000, stop=X_set[:, 1].max() + 1000, step=0.25))
-plt.contourf(X1, X2,
-             classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
+X1, X2 = np.meshgrid(np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
+                     np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01))
+plt.contourf(X1, X2, classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
              alpha=0.75, cmap=ListedColormap(('red', 'green', 'blue')))
 plt.xlim(X1.min(), X1.max())
 plt.ylim(X2.min(), X2.max())
 for i, j in enumerate(np.unique(y_set)):
-    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c=ListedColormap(('red', 'green', 'blue'))(i), label=j)
+    plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1],
+                c=ListedColormap(('red', 'green', 'blue'))(i), label=j)
 plt.title('Logistic Regression (Training set)')
 plt.xlabel('PC1')
 plt.ylabel('PC2')
